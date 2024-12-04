@@ -16,6 +16,9 @@
 }
 
 .cart-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: -20px;
     right: -10px;
@@ -24,6 +27,8 @@
     background-color: red;
     border-radius: 50%;
     text-align: center;
+    font-weight: bold;
+    color: white;
 }
 
 .product-card-container {
