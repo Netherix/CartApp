@@ -1,7 +1,22 @@
+import mockProducts from "./MockProducts"
+
+const products = mockProducts;
+
 const App = () => {
   return (
     <>
-      
+      <div className="product-card-container">
+        {products.map((product, index) => (
+          <div className="product-details" key={index}>
+            <p>{product.title}</p>
+            <img
+              src={product.images}
+              style={{ height: "10rem", width: "10rem"}}
+            />
+            <p>{product.price}</p>
+          </div>     
+        ))}
+      </div>
     </>
   )
 }
