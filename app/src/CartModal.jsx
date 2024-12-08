@@ -4,9 +4,9 @@ const CartModal = ({ closeModal, cart, setCart }) => {
   return (
     <>
       <div className="popup-container">
-        {cart.map((product, index) => (
+        {cart.map((item, index) => (
           <div key={index} className="cart-products">
-            <p>{product.product.title}</p>
+            <p>{item.product.title}</p>
           </div>
         ))}
       </div>
