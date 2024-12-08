@@ -1,11 +1,12 @@
 import mockProducts from "./MockProducts";
+import CartModal from "./CartModal";
 import "./App.css";
 import { useState, useEffect } from "react";
 
 
 const App = () => {
   const [cart, setCart] = useState([]);
-  // const [modalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const products = mockProducts;
 
@@ -60,6 +61,9 @@ const App = () => {
           </div>
         ))}
       </div>
+
+      {/* popup window */}
+      {isModalOpen && <CartModal closeModal={setIsModalOpen} cart={cart} setCart={setCart} />} 
     </>
   );
 };
