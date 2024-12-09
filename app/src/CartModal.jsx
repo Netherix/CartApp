@@ -1,6 +1,17 @@
 import PropTypes from "prop-types";
 
 const CartModal = ({ closeModal, cart, setCart }) => {
+  const handleRemoveProduct = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  }
+
+  const handleQuantityChange = (index, newQuantity) => {
+
+  }
+
   return (
     <div className="popup-container">
       <div className="popup-details">
@@ -13,6 +24,24 @@ const CartModal = ({ closeModal, cart, setCart }) => {
                   src={item.product.images}
                   style={{ height: "5rem", width: "5rem"}}            
                 />
+                <p>{item.product.price}</p>
+                {/* dropdown menu */}
+                <select 
+                  className="quantity-dropdown"
+                  value={item.quantity}
+                  onChange={(e) => 
+                    handleQuantityChange(index, parseInt(e.target.value, 10))
+                  }
+                >
+                  {[...Array(10).keys()].map((n) => (
+                    <option key={n + 1} value={n + 1}>
+                      {n + 1}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={() => handleRemoveProduct(index)}>
+                  Remove Product
+                </button>
               </li>
             ))}
           </ul>
