@@ -59,7 +59,7 @@ const App = () => {
               src={product.images}
               style={{ height: "10rem", width: "10rem" }}
             />
-            <p>{product.price}</p>
+            <p>${product.price}</p>
             <button onClick={() => addToCart(product)}>Add to Cart</button>
           </div>
         ))}

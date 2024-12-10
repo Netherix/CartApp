@@ -9,8 +9,11 @@ const CartModal = ({ closeModal, cart, setCart }) => {
   }
 
   const handleQuantityChange = (index, newQuantity) => {
-
-  }
+    const updatedCart = [...cart];
+    updatedCart[index].quantity = newQuantity;
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   return (
     <div className="popup-container">
@@ -24,7 +27,7 @@ const CartModal = ({ closeModal, cart, setCart }) => {
                   src={item.product.images}
                   style={{ height: "5rem", width: "5rem"}}            
                 />
-                <p>{item.product.price}</p>
+                <p>${(parseFloat(item.product.price) * item.quantity).toFixed(2)}</p>
                 {/* dropdown menu */}
                 <select 
                   className="quantity-dropdown"
