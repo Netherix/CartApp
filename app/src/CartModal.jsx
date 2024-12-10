@@ -6,7 +6,7 @@ const CartModal = ({ closeModal, cart, setCart }) => {
     updatedCart.splice(index, 1);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-  }
+  };
 
   const handleQuantityChange = (index, newQuantity) => {
     const updatedCart = [...cart];
@@ -15,8 +15,15 @@ const CartModal = ({ closeModal, cart, setCart }) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  const handleBackgroundClick = (e) => {
+    // Check if the click is on the background (the area outside the popup details)
+    if (e.target.classList.contains("popup-container")) {
+      closeModal();
+    }
+  };
+
   return (
-    <div className="popup-container">
+    <div className="popup-container" onClick={handleBackgroundClick}>
       <div className="popup-details">
         {cart.length > 0 ? (
           <ul>
@@ -49,15 +56,11 @@ const CartModal = ({ closeModal, cart, setCart }) => {
             ))}
           </ul>
         ) : (
-          <p>
-            Your cart is empty.
-          </p>
+          <p>Your cart is empty.</p>
         )}
         {/* close cart button */}
         <div className="close-button">
-          <button onClick={closeModal}>
-            Close Cart
-          </button>
+          <button onClick={closeModal}>Close Cart</button>
         </div>       
       </div>
     </div>
@@ -67,20 +70,16 @@ const CartModal = ({ closeModal, cart, setCart }) => {
 CartModal.propTypes = {
   closeModal: PropTypes.func.isRequired, // closeModal should be a function
   cart: PropTypes.arrayOf(
-    // cart should be an array of objects
     PropTypes.shape({
       product: PropTypes.shape({
-        title: PropTypes.string.isRequired, // Each product should have a title which is a string
-        price: PropTypes.string.isRequired, // Each product should have a price which is a string
-        images: PropTypes.arrayOf(
-          // images should be an array of strings (URLs)
-          PropTypes.string.isRequired
-        ).isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       }).isRequired,
-      quantity: PropTypes.number.isRequired, // Each item in the cart should have a quantity which is a number
+      quantity: PropTypes.number.isRequired,
     })
   ).isRequired,
-  setCart: PropTypes.func.isRequired, // setCart should be a function
+  setCart: PropTypes.func.isRequired,
 };
 
 export default CartModal;
