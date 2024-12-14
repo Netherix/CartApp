@@ -10,10 +10,11 @@ const App = () => {
   const products = mockProducts;
 
   useEffect(() => {
-    const localCart = localStorage.getItem('cart')
-    const updatedCart = localStorage ? JSON.parse(localCart) : [];
+    const localCart = localStorage.getItem('cart');
+    const updatedCart = localCart ? JSON.parse(localCart) : [];
     setCart(updatedCart);
-  }, [])
+  }, []);
+  
 
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex(item => item.product.id === product.id)
